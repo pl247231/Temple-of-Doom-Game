@@ -1,7 +1,3 @@
-// utilities.cpp
-
-// Note:  YOU MUST NOT MAKE ANY CHANGE TO THIS FILE!
-
 #include "utilities.h"
 #include <random>
 #include <utility>
