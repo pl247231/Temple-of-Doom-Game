@@ -1,7 +1,3 @@
-// utilities.h
-
-// Note:  YOU MUST NOT MAKE ANY CHANGE TO THIS FILE!
-
 #ifndef UTILITIES_INCLUDED
 #define UTILITIES_INCLUDED
 
