@@ -1,5 +1,6 @@
 #include "Level.h"
 
+using namespace std;
 
 Level::Level(Player* player, int levelnum, int goblinsmell) {
     //fill in entire grid with walls
@@ -17,11 +18,11 @@ Level::Level(Player* player, int levelnum, int goblinsmell) {
         }
     }
     int roomnum = randInt(4, 6);
-    std::vector<std::pair<int, int>> roomcenters;
-    std::vector<bool> connected;
+    vector<pair<int, int>> roomcenters;
+    vector<bool> connected;
 
     //choose first room center, but don't yet fill in room
-    roomcenters.push_back(std::make_pair(randInt(1, 68), randInt(1, 16)));
+    roomcenters.push_back(make_pair(randInt(1, 68), randInt(1, 16)));
     connected.push_back(true);
 
     //choose roomnum - 1 more room centers and create the rooms
@@ -31,16 +32,16 @@ Level::Level(Player* player, int levelnum, int goblinsmell) {
             int x = randInt(1, 68);
             int y = randInt(1, 16);
             //find x and y distance to rooms that are close enough to potentially intersect
-            int distx = xdisttoclosest(roomcenters, std::make_pair(x, y));
-            int disty = ydisttoclosest(roomcenters, std::make_pair(x, y));
+            int distx = xdisttoclosest(roomcenters, make_pair(x, y));
+            int disty = ydisttoclosest(roomcenters, make_pair(x, y));
             //if distances are valid (far enough to guarantee non intersection but close enough to not have too long hallways)
             if (distx > 11 && distx < 40 && disty > 7) {
                 //add room center to vector keeping track of room centers
-                roomcenters.push_back(std::make_pair(x, y));
+                roomcenters.push_back(make_pair(x, y));
                 connected.push_back(false);
                 //find bounds for room width and height
-                int maxwidth = std::min(distx / 2, 5);
-                int maxheight = std::min(disty / 2, 3);
+                int maxwidth = min(distx / 2, 5);
+                int maxheight = min(disty / 2, 3);
                 //generate width and height of the room
                 int width = randInt(4, maxwidth);
                 int height = randInt(2, maxheight);
@@ -61,13 +62,13 @@ Level::Level(Player* player, int levelnum, int goblinsmell) {
     int y = roomcenters[0].second;
     //erase room from roomcenters so that correct distances are returned instead of 0
     roomcenters.erase(roomcenters.begin());
-    int distx = xdisttoclosest(roomcenters, std::make_pair(x, y));
-    int disty = ydisttoclosest(roomcenters, std::make_pair(x, y));
+    int distx = xdisttoclosest(roomcenters, make_pair(x, y));
+    int disty = ydisttoclosest(roomcenters, make_pair(x, y));
     //add room back
-    roomcenters.insert(roomcenters.begin(), std::make_pair(x, y));
+    roomcenters.insert(roomcenters.begin(), make_pair(x, y));
     //find bounds of width and height
-    int maxwidth = std::min(distx / 2, 5);
-    int maxheight = std::min(disty / 2, 3);
+    int maxwidth = min(distx / 2, 5);
+    int maxheight = min(disty / 2, 3);
     //randomly generate width and height
     int width = randInt(3, maxwidth);
     int height = randInt(1, maxheight);
@@ -81,11 +82,11 @@ Level::Level(Player* player, int levelnum, int goblinsmell) {
     }
     //connect each unconnected room to the closest connected room
     for (int i = 0; i < roomnum; i++) {
-        std::pair<int, int> currroom = roomcenters[i];
-        std::pair<int, int> closest = closestconnected(roomcenters, connected, currroom);
+        pair<int, int> currroom = roomcenters[i];
+        pair<int, int> closest = closestconnected(roomcenters, connected, currroom);
         //determine what position that is on the left and right
-        std::pair<int, int> left;
-        std::pair<int, int> right;
+        pair<int, int> left;
+        pair<int, int> right;
         if (currroom.first < closest.first) {
             left = currroom;
             right = closest;
@@ -232,7 +233,7 @@ Level::~Level()
     //delete stair bound to level
     delete m_stair;
 }
-int xdisttoclosest(std::vector<std::pair<int, int>> centers, std::pair<int, int> point) {
+int xdisttoclosest(vector<pair<int, int>> centers, pair<int, int> point) {
     //find closest horizontal distance to another room that has roughly the same y value
     int bestdist = 1000;
     for (int i = 0; i < centers.size(); i++) {
@@ -243,7 +244,7 @@ int xdisttoclosest(std::vector<std::pair<int, int>> centers, std::pair<int, int>
     }
     return bestdist;
 }
-int ydisttoclosest(std::vector<std::pair<int, int>> centers, std::pair<int, int> point) {
+int ydisttoclosest(vector<pair<int, int>> centers, pair<int, int> point) {
     //find closest vertical distance to another room that has roughly the same x value
     int bestdist = 1000;
     for (int i = 0; i < centers.size(); i++) {
@@ -255,9 +256,9 @@ int ydisttoclosest(std::vector<std::pair<int, int>> centers, std::pair<int, int>
     return bestdist;
 }
 
-std::pair<int, int> closestconnected(std::vector<std::pair<int, int>> centers, std::vector<bool> connected, std::pair<int, int> point) {
+pair<int, int> closestconnected(vector<pair<int, int>> centers, vector<bool> connected, pair<int, int> point) {
     //find closest connected center
-    std::pair<int, int> closest = centers[0];
+    pair<int, int> closest = centers[0];
     int bestdist = 100000;
     for (int i = 0; i < centers.size(); i++) {
         int dist = abs(centers[i].first - point.first) + abs(centers[i].second - point.second);
@@ -304,15 +305,15 @@ bool Level::pickup() {
 }
 void Level::showinventory() {
     clearScreen();
-    std::cout << "Inventory:" << std::endl;
+    cout << "Inventory:" << endl;
     char ch = 'a';
     for (Object* obj : (m_player->getinventory())) {
         //output letters and names of objects in inventory
         if (obj->getname().substr(0, 6) == "scroll") {
-            std::cout << " " << ch << ". " << "A scroll called " + obj->getname() << std::endl;
+            cout << " " << ch << ". " << "A scroll called " + obj->getname() << endl;
         }
         else {
-            std::cout << " " << ch << ". " << obj->getname() << std::endl;
+            cout << " " << ch << ". " << obj->getname() << endl;
         }
         ch++;
     }
@@ -559,7 +560,7 @@ int Level::turn(char ch) {
     //clear message
     message = "";
     char c;
-    std::string update;
+    string update;
     //in normal play return 0
     int playerx = m_player->getx();
     int playery = m_player->gety();
@@ -683,13 +684,13 @@ void Level::display() {
     //display grid
     for (int j = 0; j < 18; j++) {
         for (int i = 0; i < 70; i++) {
-            std::cout << grid[i][j];
+            cout << grid[i][j];
         }
-        std::cout << std::endl;
+        cout << endl;
     }
     //display stats and message of all interactions
-    std::cout << "Level: " << m_levelnum << ", Hit points: " << m_player->gethit() << ", Armor: " << m_player->getarmor() << ", Strength: " << m_player->getstrength() << ", Dexterity: " << m_player->getdex() << "\n\n";
-    std::cout << message;
+    cout << "Level: " << m_levelnum << ", Hit points: " << m_player->gethit() << ", Armor: " << m_player->getarmor() << ", Strength: " << m_player->getstrength() << ", Dexterity: " << m_player->getdex() << "\n\n";
+    cout << message;
 
     //clean up actors positions for next move
     grid[m_player->getx()][m_player->gety()] = ' ';
