@@ -4,7 +4,8 @@
 #include<vector>
 #include "Actor.h"
 #include "Object.h"
-class Object;
+
+using namespace std;
 
 class Player : public Actor
 {
