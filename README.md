@@ -33,8 +33,8 @@ A scroll of enhance health (when read, raises maximum hit points)
 A scroll of enhance dexterity (when read, makes it more likely the player will hit an opponent)
 Here is an example of what the game display might look like:
 
-######################################################################\
-######################             ##           ######################\
+######################################################################<br/>
+######################             ##           ######################<br/>
 ######################          B  ##           ##              ######  
 ######################             ##     G                  )  ######  
 ######################             ##           ##       S      ######  
