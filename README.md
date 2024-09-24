@@ -1,4 +1,6 @@
-A project built for the CS32 class at UCLA
+A project built for the class CS 32 at UCLA
+
+# Description
 
 The following description of the game is sourced from the project specifications written by Professor Smallberg:
 
