@@ -8,67 +8,47 @@ Upon starting a new game, you the player are placed on the top level of the temp
 
 As you move through a level, you will encounter a number of different types of monsters that you will have to battle, including:
 
-Bogeymen (shown on screen as a B)
-Dragons (shown on screen as a D)
-Goblins (shown on screen as a G)
-Snakewomen (shown on screen as an S)
+Bogeymen (shown on screen as a B)<br/>
+Dragons (shown on screen as a D)<br/>
+Goblins (shown on screen as a G)<br/>
+Snakewomen (shown on screen as an S)<br/>
 Each of these monsters has a different behavior and reacts differently to the player (who is shown on screen as an @). More details about the monsters are below.
 
 In addition to monsters, you'll find many different objects during your adventure:
 
-Impenetrable walls (shown on screen as #)
-Stairways down to the next level (shown on screen as >)
-The golden idol (shown on screen as &)
-Weapons (all weapons are shown on screen as a ) character)
-Maces
-Short swords
-Long swords
-Magic fangs of sleep (that put an opponent to sleep)
-Magic axes (that hit an opponent more often than regular weapons)
-Scrolls (all scrolls are shown on screen as ?)
-A scroll of teleportation (when read, randomly moves the player)
-A scroll of improve armor (when read, makes it harder for monsters to hit the player)
-A scroll of raise strength (when read, makes a player's blows more effective)
-A scroll of enhance health (when read, raises maximum hit points)
-A scroll of enhance dexterity (when read, makes it more likely the player will hit an opponent)
-Here is an example of what the game display might look like:
+Impenetrable walls (shown on screen as #)<br/>
+Stairways down to the next level (shown on screen as >)<br/>
+The golden idol (shown on screen as &)<br/>
+Weapons (all weapons are shown on screen as a ) character)<br/>
+Maces<br/>
+Short swords<br/>
+Long swords<br/>
+Magic fangs of sleep (that put an opponent to sleep)<br/>
+Magic axes (that hit an opponent more often than regular weapons)<br/>
+Scrolls (all scrolls are shown on screen as ?)<br/>
+A scroll of teleportation (when read, randomly moves the player)<br/>
+A scroll of improve armor (when read, makes it harder for monsters to hit the player)<br/>
+A scroll of raise strength (when read, makes a player's blows more effective)<br/>
+A scroll of enhance health (when read, raises maximum hit points)<br/>
+A scroll of enhance dexterity (when read, makes it more likely the player will hit an opponent)<br/>
+Here is an example of what the game display might look like:<br/>
 
-######################################################################<br/>
-######################             ##           ######################<br/>
-######################          B  ##           ##              ######  
-######################             ##     G                  )  ######  
-######################             ##           ##       S      ######  
-#####             ####           ?D        #######    G         ######  
-##### >           ####      B      ###### ########              ######  
-#####        D    ####             ##         ########### ############  
-#####              S           )   ##         ########### ############  
-#####     G       ###################         ########### ############  
-#####             ################### D@      ########### ############  
-#####################################       S ########### ############  
-#####################################         ########          ######  
-######################################################   ?      ######  
-######################################################          ######  
-######################################################################  
-######################################################################  
-######################################################################  
+![image](https://github.com/user-attachments/assets/232cb403-2f44-4623-9160-5d2f7fb46d6a)
 
-Level: 3, Hit points: 10, Armor: 3, Strength: 2, Dexterity: 2
 
-Player slashes short sword at the Dragon and misses.
-the Dragon swings long sword at Player and misses.
 To control the player in the game, you issue commands from the keyboard. Use the getCharacter function we will supply you to read characters from the keyboard in a way that does not require the user to hit Enter after each command. (Also, getCharacter does not echo the character onto the screen.) Doom is not a "real-time" game; the game progresses only when the player issues a command. After each player command, the monsters each make a move and then the screen is updated to reflect the current state of the game. The player commands are:
 
-Move one space using the arrow keys or alternative movement letters:
-h to move left
-l to move right
-k to move up
-j to move down
+Move one space using the arrow keys or alternative movement letters:<br/>
+h to move left<br/>
+l to move right<br/>
+k to move up<br/>
+j to move down<br/>
 
-Attack a monster next to you by moving in its direction.
-Pick up an object by standing on it and typing g.
-Wield a weapon by typing w and then selecting a weapon from your inventory.
-Read a scroll by typing r and then selecting a scroll from your inventory.
-See an inventory of your items by typing i.
-When standing on a stairway, descend deeper into the temple by typing >.
+Attack a monster next to you by moving in its direction.<br/>
+Pick up an object by standing on it and typing g.<br/>
+Wield a weapon by typing w and then selecting a weapon from your inventory.<br/>
+Read a scroll by typing r and then selecting a scroll from your inventory.<br/>
+See an inventory of your items by typing i.<br/>
+When standing on a stairway, descend deeper into the temple by typing >.<br/>
 Quit the game by typing q.
 
