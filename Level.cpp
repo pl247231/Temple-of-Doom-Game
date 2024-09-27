@@ -448,21 +448,20 @@ bool Level::movedumb(Monster* monst) {
 }
 void Level::gendists(int x, int y, int dist, Monster* monst) {
     //helper function used to fill grid of distances to player for goblin pathfinding
+    
+    //set distance to player for this coordinate
     int dx[] = { 1, -1, 0, 0 };
     int dy[] = { 0, 0, 1, -1 };
-    if (dist < smelldist) {
-        for (int i = 0; i < 4; i++) {
-            int newx = x + dx[i];
-            int newy = y + dy[i];
-            //if current search provides a shorter path to a coordinate
-            if (actorallowed(newx, newy, monst) && disttoplayer[newx][newy] > dist + 1) {
-                //search neightboring coordinates with this new smaller distance
-                gendists(newx, newy, dist + 1, monst);
-            }
+    disttoplayer[x][y] = dist;
+    for (int i = 0; i < 4; i++) {
+        int newx = x + dx[i];
+        int newy = y + dy[i];
+        //if current search provides a shorter path to a coordinate
+        if (actorallowed(newx, newy, monst) && disttoplayer[newx][newy] > dist + 1 && dist < smelldist) {
+            //search neightboring coordinates with this new smaller distance
+            gendists(newx, newy, dist + 1, monst);
         }
     }
-    //set distance to player for this coordinate
-    disttoplayer[x][y] = dist;
 }
 bool Level::movegoblin(Monster* monst) {
     //return false if can attack, true otherwise
